@@ -11,6 +11,7 @@ public class CinemaServer {
 
     public static void main(String[] args) 
     {
+        // This is cinemaServer;
         // TODO code application logic here
         System.out.println("Main ok");
         try{
