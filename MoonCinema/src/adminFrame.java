@@ -10,12 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-// admin bizin  "ADD option la" cave aussi remove/de-assign theater-movie
-// ONE movie to MANY theater
-// theater rest BUSY c pour ca bizin cave de-assign theaer-movie
-// sinon jamais theater pour free
-// create table theater , chaque theater pour cave ene seulment 1 movieID
-
 public class adminFrame extends javax.swing.JFrame 
 {
     private static String ip;
@@ -27,7 +21,6 @@ public class adminFrame extends javax.swing.JFrame
         initComponents();
         ip = Ip;
         name = Name;
-        //System.out.println(ip);
         r = LocateRegistry.getRegistry(ip,1099);
         aCinemaDir=(CinemaInter) r.lookup("CinemaService");
         
@@ -286,9 +279,9 @@ public class adminFrame extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCreateMovie)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtDeleteMovie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDeleteMovie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDeleteMovie)
                 .addGap(17, 17, 17))
@@ -697,17 +690,7 @@ public class adminFrame extends javax.swing.JFrame
         {
             String result = aCinemaDir.assign(mid[0], theaterselected);
             JOptionPane.showMessageDialog(this,result);
-//        try
-//        {
-//            String movieselected = MoviesList.getSelectedValue();
-//            String theaterselected = TheaterList.getSelectedValue();
-//            String result = aCinemaDir.assign(movieselected,theaterselected);
-//        }
-//        catch (RemoteException ex) 
-//        {
-//            Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
+
         setOccupiedTheater();
         setTheaterList();
         } 

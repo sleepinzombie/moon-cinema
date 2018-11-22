@@ -18,7 +18,6 @@ public class Login extends javax.swing.JFrame
     {
         initComponents();
         ip = Ip;
-        //System.out.println(ip);
         r = LocateRegistry.getRegistry(ip,1099);
         aCinemaDir=(CinemaInter) r.lookup("CinemaService");
         boolean check = aCinemaDir.checkUser("", "");
@@ -163,12 +162,9 @@ public class Login extends javax.swing.JFrame
 
     private void cmdsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdsubmitActionPerformed
         try 
-        { // BIZIN met button BACK !!!
-            
+        { 
             String name = txtuname.getText();
-            // TODO add your handling code here:
             boolean check = aCinemaDir.checkUser(name, txtpwd.getText());
-            //System.out.println(check);
             if(check == true)
             {
                 String role = aCinemaDir.checkRole(name);
@@ -205,13 +201,11 @@ public class Login extends javax.swing.JFrame
     }//GEN-LAST:event_cmdsubmitActionPerformed
 
     private void cmdresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdresetActionPerformed
-        // TODO add your handling code here:
         txtuname.setText("");
         txtpwd.setText("");
     }//GEN-LAST:event_cmdresetActionPerformed
 
     private void cmdquitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdquitActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cmdquitActionPerformed
 

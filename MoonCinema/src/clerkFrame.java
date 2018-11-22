@@ -13,12 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-// comment zot conner quand 1 theater full ??? 0 seats left
-// b li decrement ?
-// bon alors bizin insert so seats to database a chaque foi ?
-// plus simple , met column max seat , current seats
-// si admin cave cree theater lerla cave insert max seat , sinon hardcode
-
 public class clerkFrame extends javax.swing.JFrame
 {
     private static String ip;
@@ -39,43 +33,9 @@ public class clerkFrame extends javax.swing.JFrame
         aCinemaDir=(CinemaInter) r.lookup("CinemaService");
         
         setMoviesList();
-        
-        // quand li select 1 movie , lerla display tout theater qui ena ca movie la
-        // apres li bizin choose 1 theater , si li libre alors true sinon false
-        // by default li select 1st   
-//        
-//        DefaultListModel listModel1 = new DefaultListModel();
-//        
-//        ArrayList<String> arrmovielist = new ArrayList<String>();
-//        
-//        arrmovielist = aCinemaDir.getAllMovies();
-//        for (int i=0; i<arrmovielist.size(); i++)
-//        {
-//            listModel1.addElement(arrmovielist.get(i));
-//        }
-//        
-        /*
-        arrmovielist = aCinemaDir.getAllMovies();
-        
-        for (int i = 0; i < arrmovielist().size(); i++)
-        {
-            listModel.addElement(arrmovielist().get(i));
-        }
-        */
-        
-//        listModel1.addElement("Movie1");
-//        listModel1.addElement("Movie2");
-//        listModel1.addElement("Movie3");
-        
-//        listMovie.setModel(listModel1);
-//        
-//        listMovie.setSelectedIndex(0);
            
         ArrayList<String> arrtheaterlist = new ArrayList<String>();
-        
-        
-        
-        
+       
         listMovie.addListSelectionListener(new ListSelectionListener() {
             DefaultListModel listModel2 = new DefaultListModel();
             ArrayList<Integer> tlist = new ArrayList<Integer>();
@@ -109,63 +69,7 @@ public class clerkFrame extends javax.swing.JFrame
         }
              
     });
-    
-                  
-//        listMovie.addListSelectionListener(new ListSelectionListener() 
-//        {
-//            public void valueChanged(ListSelectionEvent event) 
-//            {
-//                if (!event.getValueIsAdjusting())
-//                {
-//                    JList source = (JList)event.getSource();
-//                    String MovieselectedL = source.getSelectedValue().toString();
-//                    Movieselected = MovieselectedL;
-//                    
-//                    try 
-//                    {
-//                        /*
-//                        arrtheaterlist = aCinemaDir.getTheater(Movieselected);
-//
-//                        for (int i = 0; i < arrtheaterlist().size(); i++)
-//                        {
-//                            listMode2.addElement(arrtheaterlist().get(i));
-//                        }
-//                        */
-//                        listTheater.setModel(listModel2);
-//                        
-//                        listTheater.setSelectedIndex(0);
-//                        
-//                        Theaterselected = listTheater.getSelectedValue().toString();
-//                        
-//                        boolean available = aCinemaDir.checkAvailable(Movieselected,Theaterselected);
-//                        txtavailable.setText("Available: " + available);
-//                        btnTicket.setEnabled(available);
-//                        
-//                        // cave fini travail la vite vite ca
-//
-//                    } 
-//                    catch (RemoteException ex) 
-//                    {
-//                        Logger.getLogger(clerkFrame.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//        
-//                }
-//            }
-//        });
-
-        /*
-        arrtheaterlist = aCinemaDir.getTheater(Movieselected);
-        
-        for (int i = 0; i < arrtheaterlist().size(); i++)
-        {
-            listMode2.addElement(arrtheaterlist().get(i));
-        }
-        */
-
-//        listTheater.setModel(listModel2);
-//        
-//        listTheater.setSelectedIndex(0);
-        
+           
         listTheater.addListSelectionListener(new ListSelectionListener() 
         {
             public void valueChanged(ListSelectionEvent event) 
@@ -373,11 +277,7 @@ public class clerkFrame extends javax.swing.JFrame
             Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        listMovie.setModel(listModel);
-        
-        //listMovie.setSelectedIndex(0);
-        
-        
+        listMovie.setModel(listModel);  
     }
     
      public void setOccupiedTheater()
@@ -400,7 +300,6 @@ public class clerkFrame extends javax.swing.JFrame
         }
         
         listTheater.setModel(listModel);
-//        listTheater.setSelectedIndex(0);
     }
     
     private void btnTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTicketActionPerformed
@@ -415,21 +314,13 @@ public class clerkFrame extends javax.swing.JFrame
             }
             else
             {
-                JOptionPane.showMessageDialog(this,result); //display id
+                JOptionPane.showMessageDialog(this,result);
             }
-            
-//            clerkFrame c = new clerkFrame(ip,name);
-//            c.setVisible(true);
-//            this.dispose();
         } 
         catch (RemoteException ex)
         {
             Logger.getLogger(clerkFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
-//        catch (NotBoundException ex) 
-//        {
-//            Logger.getLogger(clerkFrame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }//GEN-LAST:event_btnTicketActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

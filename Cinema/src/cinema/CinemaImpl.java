@@ -21,9 +21,7 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
     public CinemaImpl() throws RemoteException
     {
         try
-        {
-            //met servername , uname , password
-            
+        {   
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moon-cinema?autoReconnect=true&useSSL=false" , "root" , "");
             S=con.createStatement();
         }
@@ -136,9 +134,6 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
         
         System.out.println("checkavailable");
         return reply;
-       // boolean abc = Math.random() < 0.5; // return randomly true or false
-        //return abc;
-        // return true si ena encore place dans theater-movie
     }
     
     public int createTicket(String movieselected , String theaterselected) throws RemoteException
@@ -158,11 +153,6 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
         } catch (SQLException ex) {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // generate ticket ID and return
-       // re-perform checkAvailable
-       // return ticket id or error 
-       // decrement theater 
-       // ticket : id , movieID , theater , price si bizin , ...
        return generatedID; 
     }
     
@@ -171,17 +161,6 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
           String sql = "INSERT INTO movies (MovieID,Name,Description) VALUES('"+id+"','"+name+"','"+des+"')";
         try {
             S.executeUpdate(sql);
-//        String sql = "INSERT IGNORE INTO movies VALUES(?,?,?)";
-//        try {
-//            PreparedStatement St=con.prepareStatement(sql);
-//            St.setString(1,id);
-//            St.setString(2,name);
-//            St.setString(3,des);
-//            St.executeUpdate();
-//            return "Movie Successfully Created";
-//        } catch (SQLException ex) {
-//            Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         } catch (SQLException ex) {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -201,7 +180,6 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
         }
         System.out.println("createuser");
         return "User Successfully Created";
-        // met BACK dans clerk+admin
     }
     
     public String deleteMovie(String id) throws RemoteException
@@ -279,7 +257,7 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
     
     public ArrayList<String> getAllFreeTheater() throws RemoteException
     {
-        String query = "SELECT TheatreID FROM theatre WHERE MovieID IS NULL"; // bizin checker
+        String query = "SELECT TheatreID FROM theatre WHERE MovieID IS NULL";
         ResultSet rs;
         
         ArrayList<String> result = new ArrayList<String>();
@@ -343,7 +321,6 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
         {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // avan assign ,  re-check si theater encore libre
         System.out.println("assign movie to theater");
         return reply;
     }
