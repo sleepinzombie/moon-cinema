@@ -92,14 +92,18 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
         ArrayList<String> arrList = new ArrayList<String>();
         String query = "SELECT * FROM movies";
         ResultSet rs;
-        try {
+        try 
+        {
             rs = S.executeQuery(query);
-            while (rs.next()) {
+            while (rs.next()) 
+            {
                 String result;
                 result = rs.getString("MovieID")+","+rs.getString("Name");
                 arrList.add(result);
             }
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) 
+        {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("getallmovies");
@@ -108,21 +112,58 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
 
     public boolean checkAvailable(String movieselected , String theaterselected) throws RemoteException
     {
+        String query = "SELECT NumOfSeat FROM theatre WHERE TheatreID=" + theaterselected + "";
+        ResultSet rs;
+        boolean reply = true;
+        
+        try {
+            rs = S.executeQuery(query);
+            while (rs.next())
+            {
+                System.out.println(rs.getInt("NumOfSeat"));
+                if (rs.getInt("NumofSeat") > 0)
+                {
+                    reply = true;
+                }
+                else
+                {
+                    reply = false;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         System.out.println("checkavailable");
-        boolean abc = Math.random() < 0.5; // return randomly true or false
-        return abc;
+        return reply;
+       // boolean abc = Math.random() < 0.5; // return randomly true or false
+        //return abc;
         // return true si ena encore place dans theater-movie
     }
     
-    public String createTicket(String movieselected , String theaterselected) throws RemoteException
+    public int createTicket(String movieselected , String theaterselected) throws RemoteException
     {
         System.out.println("createticket");
+        int generatedID = 0;
+        String insert = "INSERT INTO tickets (MovieID, TheatreID) VALUES ('"+movieselected+"', '"+theaterselected+"')";
+        String DecrementSeats = "UPDATE theatre SET NumOfSeat = NumOfSeat - 1 WHERE TheatreID='" + theaterselected + "'";
+        
+        try {
+            S.executeUpdate(insert, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = S.getGeneratedKeys();
+            rs.next();
+            generatedID = rs.getInt(1);
+            S.executeUpdate(DecrementSeats);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // generate ticket ID and return
        // re-perform checkAvailable
        // return ticket id or error 
        // decrement theater 
        // ticket : id , movieID , theater , price si bizin , ...
-       return Math.random()*10000000 + ""; 
+       return generatedID; 
     }
     
     public String createMovie(String id, String name , String des) throws RemoteException
@@ -193,7 +234,15 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
     public String deleteTicket(String id) throws RemoteException
     {   
         String sql = "DELETE FROM tickets WHERE TicketID='"+id+"'";
+        String queryForTheatre = "SELECT TheatreID FROM tickets WHERE TicketID='" + id + "'";
+        ResultSet rs;
+        
         try {
+            rs = S.executeQuery(queryForTheatre);
+            rs.next();
+            int theatreID = rs.getInt("TheatreID");
+            String IncrementSeats = "UPDATE theatre SET NumOfSeat = NumOfSeat + 1 WHERE TheatreID='" + theatreID + "'";
+            S.executeUpdate(IncrementSeats);
             S.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -230,21 +279,43 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
     
     public ArrayList<String> getAllFreeTheater() throws RemoteException
     {
-        String query = "SELECT * FROM theatre";
+        String query = "SELECT TheatreID FROM theatre WHERE MovieID IS NULL"; // bizin checker
         ResultSet rs;
-        ArrayList<String> theatresList = new ArrayList<String>();
+        
+        ArrayList<String> result = new ArrayList<String>();
+        
+        try 
+        {
+            rs = S.executeQuery(query);
+            while(rs.next())
+            {
+                result.add(rs.getString("TheatreID"));
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("getAllFreeTheater");
+        return result;
+    }
+    
+    public ArrayList<Integer> getTheaterByMovieID(String movie) {
+        String query = "SELECT TheatreID FROM theatre WHERE MovieID='" + movie + "'";
+        ResultSet rs;
+        
+        ArrayList<Integer> result = new ArrayList<Integer>();
         
         try {
             rs = S.executeQuery(query);
             while (rs.next()) {
-                theatresList.add(rs.getString("TheatreID"));
+                result.add(rs.getInt("TheatreID"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //return theater(name/ID) qui FREE
-        System.out.println("getallfreetheater");
-        return theatresList;
+        
+        return result;
     }
     
     public String assign(String movie,String theater) throws RemoteException
@@ -253,21 +324,68 @@ public class CinemaImpl extends UnicastRemoteObject implements CinemaInter
         ResultSet rs;
         String reply = "";
         
-        try {
+        try 
+        {
             rs = S.executeQuery(query);
             rs.next();
-                if (rs.getString("MovieID") != null) {
+                if (rs.getString("MovieID") != null) 
+                {
                     reply = "This theatre is already booked.";
-                } else {
+                } 
+                else 
+                {
                     String update = "UPDATE theatre SET MovieID='" + movie + "' WHERE TheatreID='" + theater + "'";
                     S.executeUpdate(update);
                     reply = "Theatre has been booked!";
                 }
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) 
+        {
             Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         // avan assign ,  re-check si theater encore libre
         System.out.println("assign movie to theater");
+        return reply;
+    }
+   
+    public ArrayList<String> getOccupiedTheater() throws RemoteException
+    {
+        String query = "SELECT TheatreID FROM theatre WHERE MovieID IS NOT NULL"; 
+        ResultSet rs;
+        
+        ArrayList<String> result = new ArrayList<String>();
+        
+        try 
+        {
+            rs = S.executeQuery(query);
+            while(rs.next())
+            {
+                result.add(rs.getString("TheatreID"));
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return result;
+    }
+    
+    public String deassign(String theater) throws RemoteException 
+    {
+        String reply = "";
+        
+        try 
+        {
+            String update = "UPDATE theatre SET MovieID = NULL WHERE TheatreID='" + theater + "'";
+            S.executeUpdate(update);
+            reply = "Theatre has been cleared out.";
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(CinemaImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("deassign");
         return reply;
     }
 }

@@ -15,7 +15,7 @@ public interface CinemaInter extends Remote
     
     boolean checkAvailable(String movieselected , String theaterselected) throws RemoteException;
     
-    String createTicket(String movieselected , String theaterselected) throws RemoteException;
+    int createTicket(String movieselected , String theaterselected) throws RemoteException;
     
     String createMovie(String id, String name , String des) throws RemoteException;
     
@@ -29,5 +29,11 @@ public interface CinemaInter extends Remote
     
     ArrayList<String> getAllFreeTheater() throws RemoteException;
     
-    String assign(String movie,String theater) throws RemoteException;
+    String assign(String movie,String theaterID) throws RemoteException;
+    
+    ArrayList<String> getOccupiedTheater() throws RemoteException;
+    
+    ArrayList<Integer> getTheaterByMovieID(String movie) throws RemoteException;
+    
+    String deassign(String theaterID) throws RemoteException;
 }

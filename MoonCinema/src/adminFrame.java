@@ -33,6 +33,7 @@ public class adminFrame extends javax.swing.JFrame
         
         setMoviesList();
         setTheaterList();
+        setOccupiedTheater();
     }
 
     public void setMoviesList()
@@ -41,33 +42,47 @@ public class adminFrame extends javax.swing.JFrame
         
         ArrayList<String> arrmovielist = new ArrayList<String>();
         
-        try {
+        try 
+        {
             arrmovielist = aCinemaDir.getAllMovies();
-            for (int i=0; i<arrmovielist.size(); i++) {
+            for (int i=0; i<arrmovielist.size(); i++) 
+            {
                 listModel.addElement(arrmovielist.get(i));
             }
-        } catch (RemoteException ex) {
+        } 
+        catch (RemoteException ex) 
+        {
             Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        /*
-        arrmovielist = aCinemaDir.getAllMovies();
-        
-        for (int i = 0; i < arrmovielist().size(); i++)
-        {
-            listModel.addElement(arrmovielist().get(i));
-        }
-        */ 
-        
-        // un comment /**/ apres comment ban addElement la
-//        listModel.addElement("Movie1");
-//        listModel.addElement("Movie2");
-//        listModel.addElement("Movie3");
         
         MoviesList.setModel(listModel);
         
         MoviesList.setSelectedIndex(0);
+        
+        
+    }
+    
+    public void setOccupiedTheater()
+    {
+        DefaultListModel listModel = new DefaultListModel();
+        
+        ArrayList<String> OccupiedTheaterlist = new ArrayList<String>();
+        
+        try 
+        {
+            OccupiedTheaterlist = aCinemaDir.getOccupiedTheater();
+            for (int i=0; i<OccupiedTheaterlist.size(); i++) 
+            {
+                listModel.addElement(OccupiedTheaterlist.get(i));
+            }
+        } 
+        catch (RemoteException ex) 
+        {
+            Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        lstfreetheater.setModel(listModel);
+        
     }
     
     public void setTheaterList()
@@ -76,30 +91,19 @@ public class adminFrame extends javax.swing.JFrame
         
         ArrayList<String> arrtheaterlist = new ArrayList<String>();
         
-        try {
+        try 
+        {
             arrtheaterlist = aCinemaDir.getAllFreeTheater();
-            for (int i=0; i<arrtheaterlist.size(); i++) {
+            for (int i=0; i<arrtheaterlist.size(); i++) 
+            {
                 listModel.addElement(arrtheaterlist.get(i));
             }
-        } catch (RemoteException ex) {
+        } 
+        catch (RemoteException ex) 
+        {
             Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        /*
-        arrtheaterlist = aCinemaDir.getAllFreeTheater();
-        
-        for (int i = 0; i < arrtheaterlist.size(); i++)
-        {
-            listModel.addElement(arrtheaterlist.get(i));
-        }
-        */
-        
-//        listModel.addElement("Theater1");
-//        listModel.addElement("Theater2");
-//        listModel.addElement("Theater3");
-        
+              
         TheaterList.setModel(listModel);
         
     }
@@ -109,77 +113,68 @@ public class adminFrame extends javax.swing.JFrame
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        btnticket = new javax.swing.JButton();
-        txtuname = new javax.swing.JTextField();
-        txtTicketId = new javax.swing.JLabel();
-        movie = new javax.swing.JLabel();
-        movieId = new javax.swing.JLabel();
-        txtDesc = new javax.swing.JTextField();
+        btnexit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         movieId1 = new javax.swing.JLabel();
         txtMovieId1 = new javax.swing.JTextField();
         desc = new javax.swing.JLabel();
         txtMovieName1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        MoviesList = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TheaterList = new javax.swing.JList<>();
-        btnAssign = new javax.swing.JButton();
         btnCreateMovie = new javax.swing.JButton();
-        btnDeleteMovie = new javax.swing.JButton();
+        movie = new javax.swing.JLabel();
+        movieId = new javax.swing.JLabel();
+        txtDesc = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtDeleteMovie = new javax.swing.JTextField();
+        btnDeleteMovie = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        txtpwd = new javax.swing.JPasswordField();
+        txtRole = new javax.swing.JComboBox<>();
         User = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        ticketId1 = new javax.swing.JTextField();
         role = new javax.swing.JLabel();
+        txtuname = new javax.swing.JTextField();
         pwd = new javax.swing.JLabel();
         btnCreateUser = new javax.swing.JButton();
         deleteUname = new javax.swing.JLabel();
         txtDeleteUname = new javax.swing.JTextField();
         btnDeleteUser = new javax.swing.JButton();
-        btnexit = new javax.swing.JButton();
-        txtpwd = new javax.swing.JPasswordField();
-        txtRole = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        ticketId1 = new javax.swing.JTextField();
+        btnticket = new javax.swing.JButton();
+        txtTicketId = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        MoviesList = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TheaterList = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnAssign = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstfreetheater = new javax.swing.JList<>();
+        jLabel9 = new javax.swing.JLabel();
+        btnDeassign = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrator Panel");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setText("Admin");
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Administrators Panel");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setText("Ticket");
-
-        btnticket.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnticket.setText("Cancel Ticket");
-        btnticket.addActionListener(new java.awt.event.ActionListener() {
+        btnexit.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnexit.setText("EXIT");
+        btnexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnticketActionPerformed(evt);
+                btnexitActionPerformed(evt);
             }
         });
 
-        txtuname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtunameActionPerformed(evt);
-            }
-        });
-
-        txtTicketId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtTicketId.setText("Ticket Id:");
-
-        movie.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        movie.setText("Movie");
-
-        movieId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        movieId.setText("Movie Id: ");
-
-        txtDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescActionPerformed(evt);
-            }
-        });
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         movieId1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         movieId1.setText("Movie Name: ");
@@ -199,29 +194,7 @@ public class adminFrame extends javax.swing.JFrame
             }
         });
 
-        MoviesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Mov1", "Mov2", "Mov3" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(MoviesList);
-
-        TheaterList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Thea1", "Thea2", "Thea3" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(TheaterList);
-
-        btnAssign.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnAssign.setText("Assign");
-        btnAssign.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignActionPerformed(evt);
-            }
-        });
-
-        btnCreateMovie.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnCreateMovie.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCreateMovie.setText("Create Movie");
         btnCreateMovie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,11 +202,15 @@ public class adminFrame extends javax.swing.JFrame
             }
         });
 
-        btnDeleteMovie.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnDeleteMovie.setText("Delete Movie");
-        btnDeleteMovie.addActionListener(new java.awt.event.ActionListener() {
+        movie.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        movie.setText("Movies");
+
+        movieId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        movieId.setText("Movie Id: ");
+
+        txtDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteMovieActionPerformed(evt);
+                txtDescActionPerformed(evt);
             }
         });
 
@@ -246,25 +223,111 @@ public class adminFrame extends javax.swing.JFrame
             }
         });
 
-        User.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        User.setText("User");
+        btnDeleteMovie.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnDeleteMovie.setText("Delete Movie");
+        btnDeleteMovie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteMovieActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(movieId)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtMovieId1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(movieId1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMovieName1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(desc)
+                            .addComponent(movie)
+                            .addComponent(jLabel3))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDesc)
+                            .addComponent(txtDeleteMovie)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 128, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDeleteMovie, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCreateMovie, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(movie)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(movieId)
+                    .addComponent(txtMovieId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(desc))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(movieId1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMovieName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCreateMovie)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDeleteMovie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDeleteMovie)
+                .addGap(17, 17, 17))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtpwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpwdActionPerformed(evt);
+            }
+        });
+
+        txtRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRoleActionPerformed(evt);
+            }
+        });
+
+        User.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        User.setText("Users");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Username:");
 
-        ticketId1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ticketId1ActionPerformed(evt);
-            }
-        });
-
         role.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         role.setText("Role:");
+
+        txtuname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtunameActionPerformed(evt);
+            }
+        });
 
         pwd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         pwd.setText("Password:");
 
-        btnCreateUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnCreateUser.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCreateUser.setText("Create User");
         btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,7 +344,7 @@ public class adminFrame extends javax.swing.JFrame
             }
         });
 
-        btnDeleteUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnDeleteUser.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDeleteUser.setText("Delete User");
         btnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,189 +352,295 @@ public class adminFrame extends javax.swing.JFrame
             }
         });
 
-        btnexit.setText("EXIT");
-        btnexit.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCreateUser))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnDeleteUser))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(role)
+                                    .addComponent(pwd)
+                                    .addComponent(User)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(deleteUname)))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDeleteUname)
+                            .addComponent(txtpwd)
+                            .addComponent(txtuname)
+                            .addComponent(txtRole, 0, 145, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(User)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtuname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(role)
+                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pwd)
+                    .addComponent(txtpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCreateUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteUname)
+                    .addComponent(txtDeleteUname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(btnDeleteUser)
+                .addContainerGap())
+        );
+
+        txtRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "clerk"}));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setText("Tickets");
+
+        ticketId1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnexitActionPerformed(evt);
+                ticketId1ActionPerformed(evt);
             }
         });
 
-        txtpwd.addActionListener(new java.awt.event.ActionListener() {
+        btnticket.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnticket.setText("Cancel Ticket");
+        btnticket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpwdActionPerformed(evt);
+                btnticketActionPerformed(evt);
             }
         });
 
-        txtRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        txtRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRoleActionPerformed(evt);
-            }
-        });
+        txtTicketId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtTicketId.setText("Ticket Id:");
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 98, Short.MAX_VALUE)
+                        .addComponent(btnticket))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtTicketId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ticketId1)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTicketId)
+                    .addComponent(ticketId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnticket)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        MoviesList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Mov1", "Mov2", "Mov3" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(MoviesList);
+
+        TheaterList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Thea1", "Thea2", "Thea3" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(TheaterList);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Movie:");
 
-        jLabel6.setText("Theatre:");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Free Theater:");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel8.setText("Manage Free Theaters");
+
+        btnAssign.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAssign.setText("Assign");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnAssign)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAssign)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel7.setText("Occupied Theater:");
+
+        lstfreetheater.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Thea1", "Thea2", "Thea3" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(lstfreetheater);
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel9.setText("Manage Occupied Theaters");
+
+        btnDeassign.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnDeassign.setText("De-Assign");
+        btnDeassign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeassignActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDeassign)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDeassign)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAssign)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnexit))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(movie)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(movieId)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtMovieId1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(movieId1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtMovieName1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(desc)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(65, 65, 65)
-                                        .addComponent(jLabel6)))
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(134, 134, 134)
-                                        .addComponent(User)
-                                        .addGap(168, 168, 168)
-                                        .addComponent(jLabel2))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(50, 50, 50)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnDeleteUser)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addComponent(jLabel1)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                    .addComponent(jLabel4)
-                                                                    .addComponent(role)
-                                                                    .addComponent(pwd)))
-                                                            .addComponent(deleteUname))
-                                                        .addGap(32, 32, 32)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(txtuname, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                                            .addComponent(txtDeleteUname, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                                            .addComponent(txtpwd)
-                                                            .addComponent(txtRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(5, 5, 5)
-                                                        .addComponent(btnCreateUser)))
-                                                .addGap(51, 51, 51)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(txtTicketId)
-                                                        .addGap(29, 29, 29)
-                                                        .addComponent(ticketId1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(btnticket)))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(17, 17, 17)
-                                .addComponent(txtDeleteMovie, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnCreateMovie)
-                            .addComponent(btnDeleteMovie))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(489, 489, 489)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnexit)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(371, 371, 371))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(movie)
-                    .addComponent(User)
-                    .addComponent(jLabel2))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnexit)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(movieId)
-                            .addComponent(txtMovieId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(movieId1)
-                            .addComponent(txtMovieName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(desc)
-                            .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCreateMovie)
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtDeleteMovie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDeleteMovie)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAssign)
-                            .addComponent(btnexit))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtuname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTicketId)
-                                .addComponent(ticketId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(role)
-                                .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnticket))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pwd)
-                            .addComponent(txtpwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addComponent(btnCreateUser)
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deleteUname, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDeleteUname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDeleteUser)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
-
-        txtRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "clerk"}));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -518,13 +687,14 @@ public class adminFrame extends javax.swing.JFrame
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
-        String movieselected = MoviesList.getSelectedValue();
+        String movieselected = MoviesList.getSelectedValue().toString();
         String theaterselected = TheaterList.getSelectedValue();
         System.out.println(movieselected + theaterselected);
         String [] mid =  movieselected.split(",");
         System.out.println(mid[0]);
 
-        try {
+        try 
+        {
             String result = aCinemaDir.assign(mid[0], theaterselected);
             JOptionPane.showMessageDialog(this,result);
 //        try
@@ -538,11 +708,13 @@ public class adminFrame extends javax.swing.JFrame
 //            Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        
-//        setTheaterList();
-        } catch (RemoteException ex) {
+        setOccupiedTheater();
+        setTheaterList();
+        } 
+        catch (RemoteException ex)
+        {
             Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setTheaterList();
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void txtDeleteMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDeleteMovieActionPerformed
@@ -565,19 +737,20 @@ public class adminFrame extends javax.swing.JFrame
             String name = txtMovieName1.getText();
             String des = txtDesc.getText();
             
-            if(movieid.equals("")||name.equals("")||des.equals("")){
-            JOptionPane.showMessageDialog(null,"Please fill all information","Alert",JOptionPane.ERROR_MESSAGE);
+            if(movieid.equals("")||name.equals("")||des.equals(""))
+            {
+                JOptionPane.showMessageDialog(null,"Please fill all information","Alert",JOptionPane.ERROR_MESSAGE);
             }
-            
-            else{
-            String result = aCinemaDir.createMovie(movieid,name,des);
-            
-            JOptionPane.showMessageDialog(this,result);
-            txtMovieId1.setText("");
-            txtMovieName1.setText("");
-            txtDesc.setText("");
-            
-            setMoviesList();
+            else
+            {
+                String result = aCinemaDir.createMovie(movieid,name,des);
+
+                JOptionPane.showMessageDialog(this,result);
+                txtMovieId1.setText("");
+                txtMovieName1.setText("");
+                txtDesc.setText("");
+
+                setMoviesList();
             }
         }
         catch (RemoteException ex) 
@@ -623,15 +796,17 @@ public class adminFrame extends javax.swing.JFrame
         try 
         {
             String movieid = txtDeleteMovie.getText();
-            if(movieid.equals("")){
-            JOptionPane.showMessageDialog(null,"Please fill all information","Alert",JOptionPane.ERROR_MESSAGE);
+            if(movieid.equals(""))
+            {
+                JOptionPane.showMessageDialog(null,"Please fill all information","Alert",JOptionPane.ERROR_MESSAGE);
             }
-            else{
-            String result = aCinemaDir.deleteMovie(movieid);
-            JOptionPane.showMessageDialog(this,result);
-            txtDeleteMovie.setText("");
-            
-            setMoviesList();
+            else
+            {
+                String result = aCinemaDir.deleteMovie(movieid);
+                JOptionPane.showMessageDialog(this,result);
+                txtDeleteMovie.setText("");
+
+                setMoviesList();
             }
         } 
         catch (RemoteException ex) 
@@ -646,14 +821,16 @@ public class adminFrame extends javax.swing.JFrame
         try 
         {
             String name = txtDeleteUname.getText();
-             if(name.equals("")){
-            JOptionPane.showMessageDialog(null,"Please fill all information","Alert",JOptionPane.ERROR_MESSAGE);
+            if(name.equals(""))
+            {
+                JOptionPane.showMessageDialog(null,"Please fill all information","Alert",JOptionPane.ERROR_MESSAGE);
             }
-            else{
-            String result = aCinemaDir.deleteUser(name);
-            JOptionPane.showMessageDialog(this,result);
-            txtDeleteUname.setText("");
-             }
+            else
+            {
+                String result = aCinemaDir.deleteUser(name);
+                JOptionPane.showMessageDialog(this,result);
+                txtDeleteUname.setText("");
+            }
         } 
         catch (RemoteException ex) 
         {
@@ -675,6 +852,22 @@ public class adminFrame extends javax.swing.JFrame
     private void txtRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRoleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRoleActionPerformed
+
+    private void btnDeassignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeassignActionPerformed
+        // TODO add your handling code here:
+        String theaterselected = lstfreetheater.getSelectedValue().toString();
+        try 
+        {
+            String result = aCinemaDir.deassign(theaterselected);
+            JOptionPane.showMessageDialog(this,result);
+        }
+        catch(RemoteException ex)
+        {
+            Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setTheaterList();
+        setOccupiedTheater(); 
+    }//GEN-LAST:event_btnDeassignActionPerformed
 
     /**
      * @param args the command line arguments
@@ -731,6 +924,7 @@ public class adminFrame extends javax.swing.JFrame
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnCreateMovie;
     private javax.swing.JButton btnCreateUser;
+    private javax.swing.JButton btnDeassign;
     private javax.swing.JButton btnDeleteMovie;
     private javax.swing.JButton btnDeleteUser;
     private javax.swing.JButton btnexit;
@@ -743,8 +937,18 @@ public class adminFrame extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> lstfreetheater;
     private javax.swing.JLabel movie;
     private javax.swing.JLabel movieId;
     private javax.swing.JLabel movieId1;
